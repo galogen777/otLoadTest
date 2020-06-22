@@ -1,7 +1,7 @@
 
 context('Actions', () => {
     beforeEach(() => {
-        cy.visit('http://192.168.11.115:9116/OTWG20116100/#/login')
+        cy.visit('http://37.230.152.123/OTWG20/#/login')
     })
 
 
@@ -17,7 +17,7 @@ context('Actions', () => {
 
             cy.get('.login-button-login').click();
 
-            cy.get('.CatalogueFolders').find('.CatalogueFolder')
+            cy.get('.CatalogueFolders', {timeout: 7000}).find('.CatalogueFolder')
                 .then((items)=>{
                     const itemsCount = Cypress.$(items).length;
                     if (itemsCount===1) {
