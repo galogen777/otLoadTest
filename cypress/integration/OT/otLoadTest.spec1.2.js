@@ -1,28 +1,36 @@
 
 context('Actions', () => {
+
     beforeEach(() => {
-        cy.visit('http://37.230.152.123/OTWG20/#/login')
+        cy.visit('http://37.230.152.123/OTWG20/#/login?guestlogin=1')
     })
 
 
     it('Login to OT Gateway', () => {
         for (let i = 0; i < 10; i++) {
+
+
             cy.get('login-input:nth-child(1) > input')
-                .type('emp1').should('have.value', 'emp1');
+                .type('m.alekhina').should('have.value', 'm.alekhina');
 
 
-            cy.get('login-input:nth-child(2) > input')
-                .type('1', { force: true })
-                .should('have.value', '1')
+            // cy.get('login-input:nth-child(2) > input')
+            //     .type('1', { force: true })
+            //     .should('have.value', '1')
 
             cy.get('.login-button-login').click();
+            //cy.get('span.navigation-sub-item').click();
+            //cy.get('button#navigationDetailsId169').click();
+
+
+
 
             cy.get('.CatalogueFolders', {timeout: 7000}).find('.CatalogueFolder')
                 .then((items)=>{
                     const itemsCount = Cypress.$(items).length;
                     if (itemsCount===1) {
                         cy.get('.CatalogueFolders').find('.CatalogueFolder');
-                        cy.get('.CatalogueFolder').click();
+                        cy.get('.CatalogueFolder',{timeout: 7000}).click();
                     }
 
                 });
