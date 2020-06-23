@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: 'cypress/base:12.18.0'
+      - image: 'cypress/browsers:node12.18.0-chrome83-ff77'
         environment:
           TERM: xterm
     parallelism: 4
@@ -25,7 +25,7 @@ jobs:
             - ~/.cache
       - run:
           name: Running OT test1
-          command: node_modules/.bin/cypress run  --spec "cypress/integration/OT/*" --browser google-chrome --headless
+          command: node_modules/.bin/cypress run  --spec "cypress/integration/OT/*" --browser chrome --headless
       - store_test_results:
           path: results
       - store_artifacts:
