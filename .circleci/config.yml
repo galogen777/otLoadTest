@@ -24,7 +24,7 @@ jobs:
             - ~/.npm
             - ~/.cache
       - run:
-          name: Running OT test
+          name: Running OT test1
           command: cypress run  --spec "cypress/integration/OT/*" --browser chrome --headless
       - store_test_results:
           path: results
