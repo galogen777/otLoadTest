@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~
+#    working_directory: ~
     docker:
       - image: 'cypress/base:10'
         environment:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
 #      - run: pwd
-#      - run: ls
+      - run: ls
       - restore_cache:
           keys:
             - 'v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}'
