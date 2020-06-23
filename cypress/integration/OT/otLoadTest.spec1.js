@@ -17,14 +17,14 @@ context('Actions', () => {
             // cy.get('login-input:nth-child(2) > input')
             //     .type('1', { force: true })
             //     .should('have.value', '1')
-
+            cy.screenshot();
             cy.get('.login-button-login').click();
             //cy.get('span.navigation-sub-item').click();
             //cy.get('button#navigationDetailsId169').click();
 
 
 
-
+            cy.screenshot();
             cy.get('.CatalogueFolders', {timeout: 7000}).find('.CatalogueFolder')
                 .then((items)=>{
                     const itemsCount = Cypress.$(items).length;
@@ -34,14 +34,6 @@ context('Actions', () => {
                     }
 
                 });
-
-
-
-            // cy.get('.CatalogueFolders').find('.CatalogueFolder[id=569797]');
-            // cy.get('.CatalogueFolder[id=569797]').click();
-            cy.wait(1000);
-            // cy.get('a[id="569798"]').click({force: true});
-
 
             for (let i = 0; i < 20; i++) {
 
