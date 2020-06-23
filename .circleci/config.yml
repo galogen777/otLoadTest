@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/tmp
     docker:
-      - image: 'cypress/base:10-browsers'
+      - image: 'cypress/base:12.18.0'
         environment:
           TERM: xterm
     parallelism: 4
