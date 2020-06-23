@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/tmp
+    working_directory: ~/
     docker:
       - image: 'cypress/base:10'
         environment:
@@ -28,7 +28,7 @@ jobs:
             - .cache
             - tmp
   test1:
-    working_directory: ~/tmp
+    working_directory: ~/
     docker:
       - image: 'cypress/base:10'
         environment:
@@ -46,7 +46,7 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
   test2:
-    working_directory: ~/tmp
+    working_directory: ~/
     docker:
       - image: 'cypress/base:10'
         environment:
@@ -64,7 +64,7 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
   test3:
-    working_directory: ~/tmp
+    working_directory: ~/
     docker:
       - image: 'cypress/base:10'
         environment:
@@ -82,7 +82,7 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
   test4:
-    working_directory: ~/tmp
+    working_directory: ~/
     docker:
       - image: 'cypress/base:10'
         environment:
