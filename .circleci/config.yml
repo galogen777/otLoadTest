@@ -2,15 +2,16 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ~/app
     docker:
       - image: 'cypress/base:10'
         environment:
           TERM: xterm
+    parallelism: 4
     steps:
       - checkout
-      - run: pwd
-      - run: ls
+#      - run: pwd
+#      - run: ls
       - restore_cache:
           keys:
             - 'v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}'
@@ -22,98 +23,13 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - .cache
-            - tmp
-  test1:
-    working_directory: ~/
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
       - run:
-          name: Running cypress tests 1
-          command: $(npm bin)/cypress run --spec cypress/integration/OT/otLoadTest.spec1.js
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
-  test2:
-    working_directory: ~/
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
-      - run:
-          name: Running cypress tests 2
-          command: $(npm bin)/cypress run --spec cypress/integration/cypress/integration/OT/otLoadTest.spec1.1.js
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
-  test3:
-    working_directory: ~/
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
-      - run:
-          name: Running cypress tests 3
-          command: $(npm bin)/cypress run --spec cypress/integration/otLoadTest.spec1.2.js
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
-  test4:
-    working_directory: ~/
-    docker:
-      - image: 'cypress/base:10'
-        environment:
-          TERM: xterm
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: ls -la cypress
-      - run: ls -la cypress/integration
-      - run:
-          name: Running cypress tests 4
-          command: $(npm bin)/cypress run --spec cypress/integration/otLoadTest.spec1.3.js
+          name: Running OT test
+          command: cypress run  --spec "cypress/integration/OT/*" --browser chrome --headless
+      - store_test_results:
+          path: results
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
           path: cypress/screenshots
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test1:
-          requires:
-            - build
-      - test2:
-          requires:
-            - build
-      - test3:
-          requires:
-            - build
-      - test4:
-          requires:
-            - build
