@@ -7,7 +7,7 @@ jobs:
       - image: 'cypress/browsers:node12.18.0-chrome83-ff77'
         environment:
           TERM: xterm
-    parallelism: 10
+    parallelism: 4
     steps:
       - checkout
 #      - run: pwd
